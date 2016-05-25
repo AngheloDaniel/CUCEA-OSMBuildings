@@ -1,0 +1,84 @@
+html, body {
+	      	margin: 0;
+	      	padding: 0;
+	      	width: 100%;
+	      	height: 100%;
+	    }
+
+	    text { color: #fff; }
+
+	    #contenedorMap { 
+	    	position:relative;
+	      	width: 100%;
+	      	height: 85%; 
+	     }
+
+	    #map {
+	    	position:relative;
+	      	width: 100%;
+	      	height: 100%;
+	    }
+
+	    #datos{
+	    	width: 100%;
+	    	height: 100%;
+	    	background-color: #333;
+	    	opacity:0.2;
+	    	z-index: 1000; 
+	    }
+
+	    #graficas{ position:relative; width: 100%; height: 85%; text-align: center; color: #fff; padding: 5% 2%;}
+
+	    .footer { background-color: #042F3B;position: fixed; width: 99.5%; height: 130px; bottom: 0px;  }
+	    .titulo-footer { background-color: #043846;position: relative; width: 100%; height: 30px; top: 0px; color: #fff;}
+
+	    .contenido-footer { background-color: #042F3B;position: relative; width: 100%; height: 100px; color: #fff;}
+
+	    .control {
+		    position: absolute;
+		    left: 0;
+		    z-index: 1000;
+	    }
+
+	    .control.tilt {
+	      top: 100px;
+	    }
+
+	    .control.rotation {
+	      top: 145px;
+	    }
+
+	    .control.zoom {
+	      top: 190px;
+	    }
+
+	    .control.zoom button{
+	      font-weight: normal;
+	    }
+
+	    .control button {
+	      width: 30px;
+	      height: 30px;
+	      margin: 15px 0 0 15px;
+	      border: 1px solid #999999;
+	      background: #ffffff;
+	      box-shadow: 1px 1px 10px #888;
+	      font-weight: bold;
+	      text-align: center;
+	    }
+
+	    .control button:hover {
+	      opacity: 1;
+	      cursor: pointer;
+	    }
+
+	    .contenedor { position:fixed; background-color: #03252D; width: 99.5%; height: 100%;}
+
+	    .flecha { line-height: 110px; cursor: pointer; }
+	    .flecha:hover { background-color: #133A45 }
+	    .contenido{ float: left; margin-right: 5px; line-height: 2em; text-align: center; display: block;}
+	    .linea { text-align: center; }
+	    .metricas-footer { float: left; padding-top: 10px }
+	    .metricas { cursor: pointer; }
+	    .oculto { display:none; }
+	    .axis path, .axis line{ fill: none; stroke: #000; shape-rendering: crishpEdges; }

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<!--  Librerías utilizadas
+	<script   src="https://code.jquery.com/jquery-2.2.3.min.js"   integrity="sha256-a23g1Nt4dtEYOj7bR+vTu7+T8VP13humZFBJNIYoEJo="   crossorigin="anonymous"></script>
+	<script type="text/javascript" src="http://cdn.osmbuildings.org/OSMBuildings-GLMap-2.0.0/GLMap/GLMap.js"></script>
+	<script type="text/javascript" src="http://cdn.osmbuildings.org/OSMBuildings-GLMap-2.0.0/OSMBuildings/OSMBuildings-GLMap.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="http://cdn.osmbuildings.org/OSMBuildings-GLMap-2.0.0/GLMap/GLMap.css">
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">-->
+</head>
+<body>
+	<div class="contenedor">
+		<div id="graficas" class="col-md-12 oculto"> 
+			<div class="col-md-12">
+				<p style="color: #fff; cursor: pointer" id="mostrar_mapa">Volver al mapa</p>	
+			</div>
+			<div class="col-md-3">
+				<h3><i class="fa fa-check"></i> 
+					<span id="titulo-metrica">LIGHT</span>
+				</h3>
+				<div class="col-md-6" style="margin-top: 40px">
+					<span style="font-size: 2.5em; "><strong>50.9</strong></span>
+				</div>
+				<div class="col-md-6"></div>
+				<div class="col-md-12">
+					<p style="float: left; color: #85CADB">lm</p>
+				</div>
+				<div class="col-md-12">
+					<p style="text-align: left; color: #4F8390">The lumen is the SI derived unit of luminous flux, a measure of the total quantity of visible light emitted by a source. </p>
+				</div>
+			</div>
+			<div class="col-md-9">
+				<div id="grafica" class="col-md-12"></div>
+			</div>
+		</div>
+		<div id="contenedorMap">
+			<div id="map"></div>
+		</div>	
+		<div class="footer">
+			<div class="titulo-footer">
+				<div class="col-md-4" style="color: #00B0FF; line-height: 30px"><i class="fa fa-bullseye"></i> <span id="nombre-edificio">Selecciona un edificio</span> <span id="estatus-dispositivo" style="margin-left: 30px; opacity: 0.6; color: #eee;">On-line</span></div>
+				<div class="col-md-4" style="text-align: center; line-height: 30px"><span style="opacity: 0.5">ÚLTIMA ACTUALIZACIÓN DE DATOS: <span id="ultima-actualizacion"></span></span></div>
+				<div class="col-md-4"></div>
+			</div>	
+			<div class="contenido-footer">
+				<div class="col-md-1 flecha">
+					<i style="color: #81969C; text-align: center;" class="fa fa-angle-left fa-3x"></i>
+				</div>
+				<div class="col-md-2 metricas-footer">
+					<div class="row">
+						<div class="col-md-12 linea">
+							<p>
+								<i style="color: #87CEDF; font-size: 1.2em; margin-right: 5px;" class="fa fa-bolt"></i> 
+								<span style="font-size: 2.5em;"><strong id="lm-medicion">0</strong></span> 
+								<span style="color: #00A3EC; width: 20px; ">lm 
+									<i 
+										style="color: #00B0FF;" 
+										parametro="LIGHT"
+										id="metricas-light" 
+										class="fa fa-bar-chart metricas"></i>
+								</span>
+							</p>
+						</div>
+						<div class="col-md-12 linea" style="opacity: 0.6">Light</div>
+					</div>
+				</div>
+				<div class="col-md-2 metricas-footer">
+					<div class="row">
+						<div class="col-md-12 linea">
+							<p>
+								<i style="color: #87CEDF; font-size: 1.2em; margin-right: 5px;" class="fa fa-sun-o"></i> 
+								<span style="font-size: 2.5em;"><strong id="c-medicion">0</strong></span> 
+								<span style="color: #00A3EC; width: 20px; "> °C 	<i style="color: #00B0FF;" 
+									parametro="TEMPERATURE"
+									class="fa fa-bar-chart metricas"></i>
+								</span>
+							</p>
+						</div>
+						<div class="col-md-12 linea" style="opacity: 0.6">Temperature</div>
+					</div>
+				</div>
+				<div class="col-md-2 metricas-footer">
+					<div class="row">
+						<div class="col-md-12 linea">
+							<p>
+								<i style="color: #87CEDF; font-size: 1.2em; margin-right: 5px;" class="fa fa-tint"></i> 
+								<span style="font-size: 2.5em;"><strong id="kpa-medicion">0</strong></span> 
+								<span style="color: #00A3EC; width: 20px; ">kPa 	<i style="color: #00B0FF;" 
+										parametro="PRESSURE"
+										class="fa fa-bar-chart metricas"></i>
+								</span>
+							</p>
+						</div>
+						<div class="col-md-12 linea" style="opacity: 0.6">Preassure</div>
+					</div>
+				</div>
+				<div class="col-md-2 metricas-footer">
+					<div class="row">
+						<div class="col-md-12 linea">
+							<p>
+								<i style="color: #87CEDF; font-size: 1.2em; margin-right: 5px;" class="fa fa-volume-up"></i> 
+								<span style="font-size: 2.5em;"><strong id="db-medicion">0</strong></span> 
+								<span style="color: #00A3EC; width: 20px; ">dB 
+								<i style="color: #00B0FF;" 
+									parametro="NOISE"
+									class="fa fa-bar-chart metricas"></i></span>
+							</p>
+						</div>
+						<div class="col-md-12 linea" style="opacity: 0.6">Noise</div>
+					</div>
+				</div>
+				<div class="col-md-2 metricas-footer">
+					<div class="row">
+						<div class="col-md-12 linea">
+							<p style="display:none;">
+								<i style="color: #87CEDF; font-size: 1.2em; margin-right: 5px;" class="fa fa-coffee"></i> 
+								<span style="font-size: 2.5em;"><strong>500</strong></span> 
+								<span style="color: #00A3EC; width: 20px; ">cm3 <i style="color: #00B0FF;" class="fa fa-bar-chart metricas"></i></span>
+							</p>
+						</div>
+						<div class="col-md-12 linea" style="opacity: 0.6; display:none">Water</div>
+					</div>
+				</div>
+				<div class="col-md-1 flecha">
+					<i style="color: #81969C;float: right line-height: 100px" class="fa fa-angle-right fa-3x"></i>					
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<div class="control tilt">
+	 	<button class="dec">&#8601;</button>
+	  	<button class="inc">&#8599;</button>
+	</div>
+
+	<div class="control rotation">
+	  	<button class="inc">&#8630;</button>
+	  	<button class="dec">&#8631;</button>
+	</div>
+
+	<div class="control zoom">
+	  	<button class="dec">-</button>
+	  	<button class="inc">+</button>
+	</div>
+
+	<!-- archivos json
+
+	<script src="rectoria.js"></script>
+	<script src="innovation_center.js"></script>
+	<script src="innovation_center_2.js"></script>
+	<script src="F102.js"></script>
+	<script src="L101.js"></script>
+	<script src="L102.js"></script>
+	<script src="CTA.js"></script>
+	<script src="L305.js"></script>
+	<script src="grafica.js"></script>-->
+</body>
+</html>
